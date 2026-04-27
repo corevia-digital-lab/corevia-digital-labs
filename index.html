@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Corevia Digital Lab — Where Local Businesses Meet the Future Web</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --white:#ffffff;
+  --off:#f7f7f5;
+  --grey1:#f0efec;
+  --grey2:#d8d6d0;
+  --grey3:#9c9890;
+  --ink:#111110;
+  --ink2:#2e2d2b;
+  --accent:#0057ff;
+  --accent2:#00c2ff;
+  --radius:4px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Epilogue',sans-serif;font-weight:400;background:var(--white);color:var(--ink);line-height:1.7;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,10,10,0.75);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:66px}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.02em;color:#fff;display:flex;align-items:center;gap:8px}
+.nav-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:13.5px;font-weight:500;color:rgba(255,255,255,0.75);transition:color 0.2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:9px 22px;border-radius:var(--radius);font-size:13px!important;font-weight:600!important;transition:background 0.2s!important}
+.nav-cta:hover{background:#0040cc!important}
+
+/* ── HERO ── */
+#home{
+  min-height:100vh;
+  position:relative;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:130px 5vw 80px;
+  overflow:hidden;
+}
+.hero-bg-img{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1800&q=80') center center/cover no-repeat;
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(135deg,rgba(5,10,30,0.88) 0%,rgba(0,30,80,0.75) 50%,rgba(5,10,30,0.82) 100%);
+}
+.hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px);border-radius:999px;padding:6px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--accent2);margin-bottom:28px;animation:fadeUp 0.5s 0.1s both}
+.badge-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
+.hero-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,4.5vw,64px);line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:22px;animation:fadeUp 0.5s 0.2s both}
+.aw{color:var(--accent2);position:relative;display:inline-block}
+.aw::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:var(--accent2);border-radius:2px}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,0.75);max-width:430px;line-height:1.8;margin-bottom:38px;animation:fadeUp 0.5s 0.3s both}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp 0.5s 0.4s both}
+.btn-p{background:var(--accent);color:#fff;padding:14px 30px;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;display:inline-block}
+.btn-p:hover{background:#0040cc;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,87,255,0.4)}
+.btn-o{background:rgba(255,255,255,0.1);color:#fff;padding:14px 26px;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:600;font-size:14px;border:1.5px solid rgba(255,255,255,0.3);cursor:pointer;transition:all 0.2s;display:inline-block;backdrop-filter:blur(6px)}
+.btn-o:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.5);transform:translateY(-2px)}
+
+/* hero card */
+.hero-visual{position:relative;animation:fadeUp 0.6s 0.3s both}
+.hero-card{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);border-radius:14px;padding:26px;box-shadow:0 24px 64px rgba(0,0,0,0.35);position:relative}
+.card-tag{position:absolute;top:-13px;right:20px;background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;padding:5px 14px;border-radius:999px}
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.bar-wrap{height:8px;background:var(--grey1);border-radius:4px;margin-bottom:14px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.stat-row{display:flex;gap:12px;margin-top:18px}
+.stat-b{flex:1;background:var(--grey1);border-radius:8px;padding:12px;text-align:center}
+.stat-b .n{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;color:var(--accent)}
+.stat-b .l{font-size:10px;color:var(--grey3);margin-top:2px}
+.float-b{position:absolute;bottom:-14px;left:-18px;background:white;border:1px solid var(--grey2);border-radius:10px;padding:11px 15px;box-shadow:0 8px 28px rgba(0,0,0,0.15);display:flex;align-items:center;gap:10px;font-size:13px}
+
+/* stats strip inside hero */
+.stats-strip{position:relative;z-index:2;max-width:1100px;margin:56px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.15);border-radius:10px;overflow:hidden;animation:fadeUp 0.5s 0.5s both;backdrop-filter:blur(10px)}
+.si{background:rgba(255,255,255,0.08);padding:22px 20px;text-align:center}
+.sn{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:#fff;letter-spacing:-0.02em}
+.sl{font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px}
+
+/* ── SERVICES ── */
+#services{
+  position:relative;
+  padding:100px 5vw;
+  overflow:hidden;
+}
+.srv-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=1800&q=80') center center/cover no-repeat;
+}
+.srv-overlay{position:absolute;inset:0;z-index:1;background:rgba(247,247,245,0.94)}
+.si-wrap{position:relative;z-index:2;max-width:1100px;margin:0 auto}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;color:var(--accent);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:24px;height:1.5px;background:var(--accent)}
+.sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,3vw,44px);letter-spacing:-0.025em;line-height:1.1;color:var(--ink);margin-bottom:16px}
+.sec-sub{font-size:15px;font-weight:300;color:var(--ink2);max-width:500px;line-height:1.75}
+.srv-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:50px}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grey2);border:1px solid var(--grey2);border-radius:4px;overflow:hidden}
+.srv-card{background:rgba(255,255,255,0.97);padding:32px 26px;position:relative;overflow:hidden;transition:background 0.25s;cursor:default}
+.srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+.srv-card:hover::before{transform:scaleX(1)}
+.srv-card:hover{background:rgba(240,239,236,0.98)}
+.srv-icon{width:46px;height:46px;background:var(--grey1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:18px;transition:background 0.2s}
+.srv-card:hover .srv-icon{background:rgba(0,87,255,0.1)}
+.srv-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:9px;color:var(--ink)}
+.srv-card p{font-size:13.5px;color:var(--ink2);line-height:1.7;font-weight:300}
+.srv-tag{display:inline-block;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--accent);background:rgba(0,87,255,0.06);padding:4px 10px;border-radius:999px}
+
+/* ── ABOUT ── */
+#about{
+  position:relative;
+  padding:100px 5vw;
+  overflow:hidden;
+}
+.about-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80') center center/cover no-repeat fixed;
+}
+.about-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(255,255,255,0.97) 0%,rgba(240,244,255,0.95) 100%)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-mock{background:rgba(255,255,255,0.9);border:1px solid var(--grey2);border-radius:14px;padding:30px;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:space-between;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.08);backdrop-filter:blur(10px)}
+.about-chips{display:flex;gap:10px}
+.chip{background:var(--white);border:1px solid var(--grey2);border-radius:999px;padding:5px 13px;font-size:12px;font-weight:500}
+.chip.blue{background:rgba(0,87,255,0.07);border-color:rgba(0,87,255,0.2);color:var(--accent)}
+.ab{height:6px;background:var(--grey2);border-radius:3px;margin-bottom:9px;overflow:hidden}
+.ab-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.about-accent{position:absolute;bottom:-18px;right:-18px;background:var(--accent);color:#fff;border-radius:12px;padding:16px 20px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;line-height:1.4;box-shadow:0 12px 36px rgba(0,87,255,0.35)}
+.about-accent span{font-size:26px;font-weight:800;display:block}
+.about-vals{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:32px}
+.aval{background:rgba(255,255,255,0.85);border:1px solid var(--grey2);border-radius:8px;padding:15px 17px;backdrop-filter:blur(4px)}
+.aval h4{font-family:'Syne',sans-serif;font-weight:700;font-size:13.5px;margin-bottom:4px;color:var(--ink)}
+.aval p{font-size:12px;color:var(--grey3);line-height:1.5}
+
+/* ── PORTFOLIO ── */
+#portfolio{
+  position:relative;
+  padding:100px 5vw;
+  overflow:hidden;
+}
+.port-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=1800&q=80') center center/cover no-repeat;
+}
+.port-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(20,20,30,0.88),rgba(10,10,20,0.92))}
+.port-wrap{position:relative;z-index:2;max-width:1100px;margin:0 auto}
+.port-wrap .eyebrow{color:var(--accent2)}
+.port-wrap .eyebrow::before{background:var(--accent2)}
+.port-wrap .sec-title{color:#fff}
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.port-card{border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);transition:transform 0.25s,box-shadow 0.25s,background 0.25s;cursor:pointer;backdrop-filter:blur(8px)}
+.port-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.4);background:rgba(255,255,255,0.12)}
+.port-thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:34px;position:relative;overflow:hidden}
+.t1{background:linear-gradient(135deg,rgba(0,87,255,0.5),rgba(0,194,255,0.4))}
+.t2{background:linear-gradient(135deg,rgba(0,180,100,0.5),rgba(0,220,150,0.4))}
+.t3{background:linear-gradient(135deg,rgba(255,150,0,0.5),rgba(255,200,50,0.4))}
+.t4{background:linear-gradient(135deg,rgba(150,0,200,0.5),rgba(200,100,255,0.4))}
+.t5{background:linear-gradient(135deg,rgba(0,150,200,0.5),rgba(0,210,240,0.4))}
+.t6{background:linear-gradient(135deg,rgba(200,60,0,0.5),rgba(255,120,50,0.4))}
+.port-info{padding:18px}
+.port-type{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--accent2);margin-bottom:5px}
+.port-info h3{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#fff;margin-bottom:5px}
+.port-info p{font-size:12.5px;color:rgba(255,255,255,0.55);line-height:1.5}
+
+/* ── PRICING ── */
+#pricing{
+  position:relative;
+  padding:100px 5vw;
+  overflow:hidden;
+}
+.price-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1800&q=80') center 30%/cover no-repeat;
+}
+.price-overlay{position:absolute;inset:0;z-index:1;background:rgba(247,247,245,0.95)}
+.price-wrap{position:relative;z-index:2;max-width:1100px;margin:0 auto}
+.price-head{text-align:center;margin-bottom:50px}
+.price-head .eyebrow{justify-content:center}
+.price-head .eyebrow::before{display:none}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.p-card{border:1px solid var(--grey2);border-radius:14px;padding:32px 26px;background:rgba(255,255,255,0.92);transition:transform 0.2s,box-shadow 0.2s;backdrop-filter:blur(6px)}
+.p-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.1)}
+.p-card.feat{background:var(--ink);color:var(--white);border-color:var(--ink);transform:scale(1.03);position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.p-card.feat:hover{transform:scale(1.03) translateY(-4px)}
+.feat-lbl{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;padding:5px 16px;border-radius:999px;white-space:nowrap}
+.pname{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.feat .pname{color:var(--accent2)}
+.pprice{font-family:'Syne',sans-serif;font-weight:800;font-size:44px;letter-spacing:-0.03em;color:var(--ink);line-height:1;margin-bottom:4px}
+.feat .pprice{color:#fff}
+.pprice sup{font-size:20px;vertical-align:super}
+.pper{font-size:13px;color:var(--grey3);margin-bottom:22px}
+.feat .pper{color:rgba(255,255,255,0.5)}
+.pdesc{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--grey2)}
+.feat .pdesc{color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.1)}
+.pfeats{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pfeat{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink2)}
+.feat .pfeat{color:rgba(255,255,255,0.85)}
+.pcheck{width:17px;height:17px;background:rgba(0,87,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:2px;color:var(--accent)}
+.feat .pcheck{background:rgba(0,194,255,0.15);color:var(--accent2)}
+.pbtn{width:100%;padding:13px;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:all 0.2s;text-align:center;display:block}
+.pbtn-o{background:transparent;border:1.5px solid var(--grey2);color:var(--ink)}
+.pbtn-o:hover{border-color:var(--accent);color:var(--accent)}
+.pbtn-f{background:var(--accent);color:#fff}
+.pbtn-f:hover{background:#0040cc;box-shadow:0 6px 20px rgba(0,87,255,0.35)}
+
+/* ── CONTACT ── */
+#contact{
+  position:relative;
+  padding:100px 5vw;
+  overflow:hidden;
+}
+.ct-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1800&q=80') center center/cover no-repeat;
+}
+.ct-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(5,10,30,0.92) 0%,rgba(0,20,60,0.88) 100%)}
+.ct-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.ct-text .eyebrow{color:var(--accent2)}
+.ct-text .eyebrow::before{background:var(--accent2)}
+.ct-text .sec-title{color:#fff}
+.ct-text .sec-sub{color:rgba(255,255,255,0.65);max-width:100%}
+.ct-perks{margin-top:28px;display:flex;flex-direction:column;gap:13px}
+.cperk{display:flex;align-items:center;gap:12px;font-size:13.5px;color:rgba(255,255,255,0.75)}
+.picon{width:30px;height:30px;background:rgba(0,87,255,0.25);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.ct-form{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:32px;backdrop-filter:blur(16px)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:11px;font-weight:500;color:rgba(255,255,255,0.5);letter-spacing:0.06em;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.fg input,.fg select,.fg textarea{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:11px 13px;color:#fff;font-family:'Epilogue',sans-serif;font-size:13.5px;transition:border-color 0.2s;outline:none;resize:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent2)}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,0.3)}
+.fg select option{background:#0a0a1a}
+.btn-sub{width:100%;padding:14px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:opacity 0.2s,transform 0.15s;letter-spacing:0.02em}
+.btn-sub:hover{opacity:0.9;transform:translateY(-1px)}
+
+/* ── FOOTER ── */
+footer{background:#07070a;color:rgba(255,255,255,0.35);padding:36px 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.flogo{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px}
+.flinks{display:flex;gap:26px;font-size:13px}
+.flinks a{transition:color 0.2s}
+.flinks a:hover{color:var(--accent2)}
+.fcopy{font-size:11px;font-family:'JetBrains Mono',monospace}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .stats-strip{grid-template-columns:repeat(2,1fr)}
+  .srv-head,.about-grid,.ct-inner{grid-template-columns:1fr}
+  .about-mock{display:none}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .port-grid{grid-template-columns:1fr 1fr}
+  .price-grid{grid-template-columns:1fr}
+  .p-card.feat{transform:none}
+  .nav-links a:not(.nav-cta){display:none}
+}
+@media(max-width:560px){
+  .srv-grid,.port-grid{grid-template-columns:1fr}
+  .frow,.about-vals{grid-template-columns:1fr}
+  .stats-strip{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><div class="nav-dot"></div>Corevia<span style="color:var(--accent2)">.</span></div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#portfolio">Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="badge-dot"></span>NOW ACCEPTING NEW CLIENTS</div>
+      <h1 class="hero-h1">Where Local<br>Businesses Meet<br>the <span class="aw">Future Web</span></h1>
+      <p class="hero-sub">Corevia Technologies builds stunning, high-performance websites that turn local browsers into loyal customers — fast, modern, and built to grow.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-p">Start Your Project →</a>
+        <a href="#portfolio" class="btn-o">View Our Work</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="card-tag">LIVE DASHBOARD</div>
+        <div class="card-top"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--grey3);margin-bottom:12px;letter-spacing:0.06em">WEBSITE PERFORMANCE</div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span>Page Speed</span><span style="color:var(--accent);font-weight:600">85%</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:85%"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span>SEO Score</span><span style="color:var(--accent);font-weight:600">62%</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:62%"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span>Conversions</span><span style="color:var(--accent);font-weight:600">91%</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:91%"></div></div>
+        <div class="stat-row">
+          <div class="stat-b"><div class="n">+147%</div><div class="l">Traffic</div></div>
+          <div class="stat-b"><div class="n">3.2×</div><div class="l">Leads</div></div>
+          <div class="stat-b"><div class="n">98</div><div class="l">Satisfaction</div></div>
+        </div>
+      </div>
+      <div class="float-b"><span style="font-size:20px">🚀</span><div><div style="font-weight:600;font-size:13px">Site Launched!</div><div style="font-size:11px;color:var(--grey3)">Mama Rosa's Restaurant</div></div></div>
+    </div>
+  </div>
+  <div class="stats-strip">
+    <div class="si"><div class="sn">50+</div><div class="sl">Projects Delivered</div></div>
+    <div class="si"><div class="sn">98%</div><div class="sl">Client Satisfaction</div></div>
+    <div class="si"><div class="sn">14 Days</div><div class="sl">Avg. Launch Time</div></div>
+    <div class="si"><div class="sn">3×</div><div class="sl">Avg. Lead Increase</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="srv-bg"></div>
+  <div class="srv-overlay"></div>
+  <div class="si-wrap">
+    <div class="srv-head">
+      <div><div class="eyebrow">What We Do</div><h2 class="sec-title">Services Built<br>for Local Growth</h2></div>
+      <p class="sec-sub">Every service is crafted specifically for local businesses that want to compete — and win — online.</p>
+    </div>
+    <div class="srv-grid">
+      <div class="srv-card"><div class="srv-icon">🎨</div><h3>Web Design & Development</h3><p>Custom, mobile-first websites that look incredible and convert visitors into customers. Built fast, built right.</p><span class="srv-tag">CORE SERVICE</span></div>
+      <div class="srv-card"><div class="srv-icon">🛒</div><h3>E-Commerce Stores</h3><p>Online shops for local businesses ready to sell beyond their doors. Seamless checkout, beautiful product pages.</p><span class="srv-tag">HIGH DEMAND</span></div>
+      <div class="srv-card"><div class="srv-icon">📱</div><h3>Mobile Optimization</h3><p>60%+ of your customers browse on phones. We ensure your site is flawless on every screen size.</p><span class="srv-tag">ESSENTIAL</span></div>
+      <div class="srv-card"><div class="srv-icon">🔍</div><h3>SEO & Local Search</h3><p>Get found when locals search for what you offer. Google-ready structure, local citations, speed optimization.</p><span class="srv-tag">GROWTH</span></div>
+      <div class="srv-card"><div class="srv-icon">⚡</div><h3>Website Revamps</h3><p>Is your site outdated or underperforming? We rebuild it from the ground up — modern, fast, effective.</p><span class="srv-tag">POPULAR</span></div>
+      <div class="srv-card"><div class="srv-icon">🛡️</div><h3>Maintenance & Support</h3><p>Monthly care plans so your site stays secure, updated, and running at peak performance — always.</p><span class="srv-tag">RETAINER</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-bg"></div>
+  <div class="about-overlay"></div>
+  <div class="si-wrap">
+    <div class="about-grid">
+      <div class="about-mock">
+        <div class="about-chips"><div class="chip">🍕 Pizzeria Roma</div><div class="chip blue">Live ✓</div></div>
+        <div style="text-align:center;font-size:46px;margin:auto">🌐</div>
+        <div>
+          <div style="font-size:11px;color:var(--grey3);margin-bottom:8px;font-family:'JetBrains Mono',monospace">METRICS AFTER LAUNCH</div>
+          <div class="ab"><div class="ab-fill" style="width:78%"></div></div>
+          <div class="ab"><div class="ab-fill" style="width:91%"></div></div>
+          <div class="ab"><div class="ab-fill" style="width:65%"></div></div>
+        </div>
+        <div class="about-accent"><span>200%</span>More Online<br>Bookings</div>
+      </div>
+      <div>
+        <div class="eyebrow">Who We Are</div>
+        <h2 class="sec-title">Technology That Serves Your Neighbourhood</h2>
+        <p class="sec-sub" style="max-width:100%">Corevia Technologies was built on one belief: every local business — the corner salon, the family restaurant, the neighbourhood gym — deserves a powerful digital presence without enterprise-level complexity or cost.</p>
+        <div class="about-vals">
+          <div class="aval"><h4>⚡ Fast Delivery</h4><p>Most projects live within 14 days. No endless waiting.</p></div>
+          <div class="aval"><h4>🎯 Results-Driven</h4><p>We measure success in leads, calls, and sales — not just looks.</p></div>
+          <div class="aval"><h4>🤝 Honest Pricing</h4><p>Transparent packages. No hidden fees. Ever.</p></div>
+          <div class="aval"><h4>🔧 Ongoing Support</h4><p>We don't disappear after launch. We're your long-term tech partner.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="port-bg"></div>
+  <div class="port-overlay"></div>
+  <div class="port-wrap">
+    <div class="eyebrow">Our Work</div>
+    <h2 class="sec-title">Built for Businesses Like Yours</h2>
+    <div class="port-grid">
+      <div class="port-card"><div class="port-thumb t1">🍕</div><div class="port-info"><div class="port-type">RESTAURANT · WEB DESIGN</div><h3>Mama Rosa's Pizzeria</h3><p>Online menu, table booking & local SEO. +180% organic traffic in 60 days.</p></div></div>
+      <div class="port-card"><div class="port-thumb t2">💆</div><div class="port-info"><div class="port-type">SALON · E-COMMERCE</div><h3>Luxe Hair Studio</h3><p>Online booking integration & product store. Fully mobile-first redesign.</p></div></div>
+      <div class="port-card"><div class="port-thumb t3">🏋️</div><div class="port-info"><div class="port-type">FITNESS · WEB REVAMP</div><h3>IronCore Gym</h3><p>Membership sign-up, class schedule, trainer profiles. 3× lead increase.</p></div></div>
+      <div class="port-card"><div class="port-thumb t4">🏠</div><div class="port-info"><div class="port-type">REAL ESTATE · WEB DESIGN</div><h3>Nexus Properties</h3><p>Property listings, virtual tour integration, and contact lead forms.</p></div></div>
+      <div class="port-card"><div class="port-thumb t5">☕</div><div class="port-info"><div class="port-type">CAFÉ · BRANDING + WEB</div><h3>Blue Door Café</h3><p>Brand identity + website with events calendar and online order system.</p></div></div>
+      <div class="port-card"><div class="port-thumb t6">🔧</div><div class="port-info"><div class="port-type">TRADE SERVICES · SEO</div><h3>QuickFix Plumbing</h3><p>Local SEO ranking #1 for 6 local keywords within 45 days of launch.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="price-bg"></div>
+  <div class="price-overlay"></div>
+  <div class="price-wrap">
+    <div class="price-head">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="sec-title">Simple, Honest Packages</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">No surprises. No hidden fees. Pick what fits and grow from there.</p>
+    </div>
+    <div class="price-grid">
+      <div class="p-card">
+        <div class="pname">Starter</div>
+        <div class="pprice"><sup>$</sup>149</div>
+        <div class="pper">One-time payment</div>
+        <p class="pdesc">Perfect for new businesses needing a clean, professional online presence fast.</p>
+        <div class="pfeats">
+          <div class="pfeat"><div class="pcheck">✓</div><span>Up to 5 pages</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Mobile responsive design</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Contact form integration</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Basic SEO setup</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>14-day delivery</span></div>
+        </div>
+        <a href="#contact" class="pbtn pbtn-o">Get Started</a>
+      </div>
+      <div class="p-card feat">
+        <div class="feat-lbl">MOST POPULAR</div>
+        <div class="pname">Growth</div>
+        <div class="pprice"><sup>$</sup>299</div>
+        <div class="pper">One-time payment</div>
+        <p class="pdesc">The complete package for local businesses ready to dominate their area online.</p>
+        <div class="pfeats">
+          <div class="pfeat"><div class="pcheck">✓</div><span>Up to 10 pages</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Custom UI/UX design</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>E-commerce / booking ready</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Full local SEO optimization</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Google Analytics setup</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>30-day post-launch support</span></div>
+        </div>
+        <a href="#contact" class="pbtn pbtn-f">Get Started</a>
+      </div>
+      <div class="p-card">
+        <div class="pname">Premium</div>
+        <div class="pprice"><sup>$</sup>499</div>
+        <div class="pper">Per month (retainer)</div>
+        <p class="pdesc">For growing businesses wanting a dedicated tech partner managing their site monthly.</p>
+        <div class="pfeats">
+          <div class="pfeat"><div class="pcheck">✓</div><span>Everything in Growth</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Monthly content updates</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Performance monitoring</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Priority support (24h response)</span></div>
+          <div class="pfeat"><div class="pcheck">✓</div><span>Quarterly strategy review</span></div>
+        </div>
+        <a href="#contact" class="pbtn pbtn-o">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="ct-bg"></div>
+  <div class="ct-overlay"></div>
+  <div class="ct-inner">
+    <div class="ct-text">
+      <div class="eyebrow">Contact Us</div>
+      <h2 class="sec-title" style="color:#fff">Ready to Build<br>Something Great?</h2>
+      <p class="sec-sub">Tell us about your business and we'll respond within 24 hours with a custom plan.</p>
+      <div class="ct-perks">
+        <div class="cperk"><div class="picon">⚡</div>Response within 24 hours</div>
+        <div class="cperk"><div class="picon">📞</div>Free 30-minute strategy call</div>
+        <div class="cperk"><div class="picon">📄</div>No-obligation custom proposal</div>
+        <div class="cperk"><div class="picon">🔒</div>Your info stays private, always</div>
+      </div>
+    </div>
+    <div class="ct-form">
+      <div class="frow">
+        <div class="fg"><label>FIRST NAME</label><input type="text" placeholder="John"/></div>
+        <div class="fg"><label>LAST NAME</label><input type="text" placeholder="Doe"/></div>
+      </div>
+      <div class="fg"><label>EMAIL ADDRESS</label><input type="email" placeholder="john@yourbusiness.com"/></div>
+      <div class="fg"><label>BUSINESS TYPE</label>
+        <select>
+          <option value="">Select your business type</option>
+          <option>Restaurant / Café</option><option>Salon / Beauty</option>
+          <option>Fitness / Gym</option><option>Retail Shop</option>
+          <option>Trade Services</option><option>Other Local Business</option>
+        </select>
+      </div>
+      <div class="fg"><label>SERVICE NEEDED</label>
+        <select>
+          <option value="">What do you need?</option>
+          <option>New Website (Starter)</option><option>Full Website (Growth)</option>
+          <option>Monthly Retainer (Premium)</option><option>Not Sure — Need Advice</option>
+        </select>
+      </div>
+      <div class="fg"><label>TELL US ABOUT YOUR BUSINESS</label><textarea rows="3" placeholder="What does your business do? Any goals or challenges?"></textarea></div>
+      <button class="btn-sub">Send Message → Let's Build</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo"><span style="color:var(--accent);font-size:17px">●</span>Corevia Technologies</div>
+  <div class="flinks">
+    <a href="#home">Home</a><a href="#services">Services</a>
+    <a href="#portfolio">Work</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a>
+  </div>
+  <div class="fcopy">© 2025 COREVIA TECHNOLOGIES · ALL RIGHTS RESERVED</div>
+</footer>
+
+</body>
+</html>
